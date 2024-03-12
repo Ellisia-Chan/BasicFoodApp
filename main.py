@@ -1,59 +1,73 @@
 import tkinter as tk
 
 class ReceiptProcess:
-    def __init__(self) -> None:
+    def __init__(self):
         self.name = ""
+        self.space = ""
+        self.receipt_txt = ""
         self.coffee_amount = 0
         self.Croissant_amount = 0
         self.Carbonara_amount = 0
         self.subTotal = 0.00
         self.discount = 0.00
         self.discounted_price = 0.00
+        self.discount_percent = ""
         self.Total = 0.00
         self.coffee_price = 123.00
         self.croissant_price = 85.00
         self.carbonara_price = 250.00
+        self.coffee_order_price = 0.00
+        self.croissant_order_price = 0.00
+        self.carbonara_order_price = 0.00
 
     def receiptCalculation(self):
         self.name = ent_CustomerName.get()
         
         #Getting Discount
-        if radio1.get() == 1:
-            self.discount = 0.00
-        elif radio1.get() == 2:
+        if radio1.get() == 2:
             self.discount = 0.05
+            self.discount_percent = "5%"
         elif radio1.get() == 3:
             self.discount = 0.10
+            self.discount_percent = "10%"
         elif radio1.get() == 4:
             self.discount = 0.15
+            self.discount_percent = "15%"
         else: 
             self.discount = 0.00
+            self.discount_percent = "0%"
 
         #Calculating Order SubTotal
         if self.coffee_amount > 0:
             self.subTotal += self.coffee_amount * self.coffee_price
-        elif self.Croissant_amount > 0:
+            self.coffee_order_price = self.coffee_amount * self.coffee_price
+        if self.Croissant_amount > 0:
             self.subTotal += self.Croissant_amount * self.croissant_price
-        elif self.carbonara_price > 0:
+            self.croissant_order_price = self.Croissant_amount * self.croissant_price
+        if self.Carbonara_amount > 0:
             self.subTotal += self.Carbonara_amount * self.carbonara_price
-        else:
-            self.subTotal = 0.00
+            self.carbonara_order_price = self.Carbonara_amount * self.carbonara_price
 
         #Calculate Total after Discount
-        if self.discount == 0.05:
-            self.discounted_price = self.discount * self.subTotal
-            self.Total = self.subTotal - self.discounted_price
-        elif self.discount == 0.10:
-            self.discounted_price = self.discount * self.subTotal
-            self.Total = self.subTotal - self.discounted_price
-        elif self.discount == 0.15:
-            self.discounted_price = self.discount * self.subTotal
-            self.Total = self.subTotal - self.discounted_price
-        else:
-            self.Total = self.subTotal
+        self.discounted_price = self.discount * self.subTotal
+        self.Total = self.subTotal - self.discounted_price
 
         #Receipt Output
-           
+        lbl_receipt_CustomerName.config(text=f"Customer Name: {self.name}")
+
+        if self.coffee_amount > 0:
+            self.receipt_txt += f"   Coffee{self.space:<17} x{self.coffee_amount:<5} {self.coffee_order_price:>3}\n"
+        if self.Croissant_amount > 0:
+            self.receipt_txt += f"Croissant{self.space:<14} x{self.Croissant_amount:<5} {self.croissant_order_price}\n"
+        if self.Carbonara_amount > 0:
+            self.receipt_txt += f" Carbonara{self.space:<13} x{self.Carbonara_amount:<5} {self.carbonara_order_price}\n"
+
+        lbl_receipt_Order.config(text=self.receipt_txt)
+        lbl_receipt_discount.config(text=self.discount_percent)
+        lbl_receipt_Total.config(text=self.Total)
+        btn_enter.config(state=tk.DISABLED)
+        btn_clear.config(bg="#931f1d")
+
     def amountToggle(self):
         if menu1.get() == True:
             btn_coffee_amount1.config(state=tk.NORMAL)
@@ -115,6 +129,46 @@ class ReceiptProcess:
             self.Carbonara_amount -= 1
             lbl_Carbonara_amount.config(text=self.Carbonara_amount)
 
+    def clear(self):
+        self.name = ""
+        self.space = ""
+        self.receipt_txt = ""
+        self.coffee_amount = 0
+        self.Croissant_amount = 0
+        self.Carbonara_amount = 0
+        self.subTotal = 0.00
+        self.discount = 0.00
+        self.discounted_price = 0.00
+        self.discount_percent = ""
+        self.Total = 0.00
+        self.coffee_order_price = 0.00
+        self.croissant_order_price = 0.00
+        self.carbonara_order_price = 0.00
+
+        ent_CustomerName.delete(0, tk.END)
+
+        ck_btn_Coffee.deselect()
+        ck_btn_Croissant.deselect()
+        ck_btn_Carbonara.deselect()
+
+        lbl_Coffee_amount.config(text=0)
+        lbl_Croissant_amount.config(text=0)
+        lbl_Carbonara_amount.config(text=0)
+
+        lbl_receipt_CustomerName.config(text="Customer Name:")
+        lbl_receipt_Order.config(text="")
+        lbl_receipt_discount.config(text="")
+        lbl_receipt_Total.config(text="")      
+
+        btn_enter.config(state=tk.NORMAL)
+
+        btn_coffee_amount1.config(state=tk.DISABLED)
+        btn_coffee_amount2.config(state=tk.DISABLED)
+        btn_Croissant_amount1.config(state=tk.DISABLED)
+        btn_Croissant_amount2.config(state=tk.DISABLED)
+        btn_Carbonara_amount1.config(state=tk.DISABLED)
+        btn_Carbonara_amount2.config(state=tk.DISABLED)
+
 run = ReceiptProcess()
 
 #Window config
@@ -146,8 +200,12 @@ lbl_Carbonara_amount = tk.Label(win, text=0, font=("Helvetica", 16), bg="#bdcfb5
 
 lbl_receipt = tk.Label(win, text="Receipt", font=("Helvetica", 16), bg="#bdcfb5")
 lbl_receipt_CustomerName = tk.Label(win, text="Customer Name:", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_Order = tk.Label(win, text="Orders:", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_Total = tk.Label(win, text="Total:", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_order_title = tk.Label(win, text="Orders:", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_Order = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_discount_title = tk.Label(win, text="Discount:", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_discount = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_Total_title = tk.Label(win, text="Total:", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_Total = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
 
 lbl_CustomerName.place(x=10, y=10)  
 lbl_Menu.place(x=180, y=50)
@@ -163,8 +221,12 @@ lbl_Carbonara_amount.place(x=350, y=165)
 
 lbl_receipt.place(x=600, y=10)
 lbl_receipt_CustomerName.place(x=450, y=50)
-lbl_receipt_Order.place(x=450, y=80)
-lbl_receipt_Total.place(x=450, y=350)
+lbl_receipt_order_title.place(x=450, y=80)
+lbl_receipt_Order.place(x=450, y=110)
+lbl_receipt_discount_title.place(x=450, y=320)
+lbl_receipt_discount.place(x=700, y=320)
+lbl_receipt_Total_title.place(x=450, y=350)
+lbl_receipt_Total.place(x=700, y=350)
 
 #Entry
 ent_CustomerName = tk.Entry(win, font=("Helvetica", 16))
@@ -211,8 +273,9 @@ btn_Carbonara_amount1 = tk.Button(win, text="+", font=("Helvetica", 12), bg="#E5
 btn_Carbonara_amount2 = tk.Button(win, text="-", font=("Helvetica", 12), bg="#E5F2C9", activebackground="#E76D83", width=2,
                                    state=tk.DISABLED, command=run.amountMinusCarbonara)
 
-btn_enter = tk.Button(win, text="Enter", font=("Helvetica", 16), bg="#E5F2C9", activebackground="#E76D83", width=15)
-btn_clear = tk.Button(win, text="Clear", font=("Helvetica", 16), bg="#E5F2C9", activebackground="#E76D83", width=10)
+btn_enter = tk.Button(win, text="Enter", font=("Helvetica", 16), bg="#E5F2C9", activebackground="#E76D83", width=15,
+                       command=run.receiptCalculation)
+btn_clear = tk.Button(win, text="Clear", font=("Helvetica", 16), bg="#E5F2C9", activebackground="#E76D83", width=10, command=run.clear)
 
 btn_coffee_amount1.place(x=380, y=85)
 btn_coffee_amount2.place(x=310, y=85)
