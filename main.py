@@ -1,4 +1,5 @@
 import tkinter as tk
+import datetime
 
 class ReceiptProcess:
     def __init__(self):
@@ -19,6 +20,7 @@ class ReceiptProcess:
         self.coffee_order_price = 0.00
         self.croissant_order_price = 0.00
         self.carbonara_order_price = 0.00
+        self.date_time = ""
 
     def receiptCalculation(self):
         self.name = ent_CustomerName.get()
@@ -58,11 +60,13 @@ class ReceiptProcess:
         if self.coffee_amount > 0:
             self.receipt_txt += f"   Coffee{self.space:<17} x{self.coffee_amount:<5} {self.coffee_order_price:>3}\n"
         if self.Croissant_amount > 0:
-            self.receipt_txt += f"Croissant{self.space:<14} x{self.Croissant_amount:<5} {self.croissant_order_price}\n"
+            self.receipt_txt += f"Croissant{self.space:<16} x{self.Croissant_amount:<5} {self.croissant_order_price}\n"
         if self.Carbonara_amount > 0:
             self.receipt_txt += f" Carbonara{self.space:<13} x{self.Carbonara_amount:<5} {self.carbonara_order_price}\n"
 
+        lbl_receipt_datetime.config(text=str(datetime.datetime.now()))
         lbl_receipt_Order.config(text=self.receipt_txt)
+        lbl_receipt_subtotal.config(text=self.subTotal)
         lbl_receipt_discount.config(text=self.discount_percent)
         lbl_receipt_Total.config(text=self.Total)
         btn_enter.config(state=tk.DISABLED)
@@ -144,6 +148,7 @@ class ReceiptProcess:
         self.coffee_order_price = 0.00
         self.croissant_order_price = 0.00
         self.carbonara_order_price = 0.00
+        self.date_time = 0.00
 
         ent_CustomerName.delete(0, tk.END)
 
@@ -155,12 +160,15 @@ class ReceiptProcess:
         lbl_Croissant_amount.config(text=0)
         lbl_Carbonara_amount.config(text=0)
 
+        lbl_receipt_datetime.config(text="")
         lbl_receipt_CustomerName.config(text="Customer Name:")
         lbl_receipt_Order.config(text="")
         lbl_receipt_discount.config(text="")
-        lbl_receipt_Total.config(text="")      
+        lbl_receipt_Total.config(text="")  
+        lbl_receipt_subtotal.config(text="")    
 
         btn_enter.config(state=tk.NORMAL)
+        btn_clear.config(bg="#E76D83")
 
         btn_coffee_amount1.config(state=tk.DISABLED)
         btn_coffee_amount2.config(state=tk.DISABLED)
@@ -206,6 +214,9 @@ lbl_receipt_discount_title = tk.Label(win, text="Discount:", font=("Helvetica", 
 lbl_receipt_discount = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
 lbl_receipt_Total_title = tk.Label(win, text="Total:", font=("Helvetica", 16), bg="#bdcfb5")
 lbl_receipt_Total = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_subtotal_title = tk.Label(win, text="Subtotal:", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_subtotal = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_receipt_datetime = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
 
 lbl_CustomerName.place(x=10, y=10)  
 lbl_Menu.place(x=180, y=50)
@@ -220,13 +231,16 @@ lbl_Croissant_amount.place(x=350, y=125)
 lbl_Carbonara_amount.place(x=350, y=165)
 
 lbl_receipt.place(x=600, y=10)
-lbl_receipt_CustomerName.place(x=450, y=50)
-lbl_receipt_order_title.place(x=450, y=80)
-lbl_receipt_Order.place(x=450, y=110)
+lbl_receipt_CustomerName.place(x=450, y=80)
+lbl_receipt_order_title.place(x=450, y=120)
+lbl_receipt_Order.place(x=450, y=150)
 lbl_receipt_discount_title.place(x=450, y=320)
 lbl_receipt_discount.place(x=700, y=320)
 lbl_receipt_Total_title.place(x=450, y=350)
 lbl_receipt_Total.place(x=700, y=350)
+lbl_receipt_subtotal_title.place(x=450, y=290)
+lbl_receipt_subtotal.place(x=700, y=290)
+lbl_receipt_datetime.place(x=500, y=40)
 
 #Entry
 ent_CustomerName = tk.Entry(win, font=("Helvetica", 16))
@@ -277,13 +291,13 @@ btn_enter = tk.Button(win, text="Enter", font=("Helvetica", 16), bg="#E5F2C9", a
                        command=run.receiptCalculation)
 btn_clear = tk.Button(win, text="Clear", font=("Helvetica", 16), bg="#E5F2C9", activebackground="#E76D83", width=10, command=run.clear)
 
-btn_coffee_amount1.place(x=380, y=85)
+btn_coffee_amount1.place(x=385, y=85)
 btn_coffee_amount2.place(x=310, y=85)
 
-btn_Croissant_amount1.place(x=380, y=125)
+btn_Croissant_amount1.place(x=385, y=125)
 btn_Croissant_amount2.place(x=310, y=125)
 
-btn_Carbonara_amount1.place(x=380, y=165)
+btn_Carbonara_amount1.place(x=385, y=165)
 btn_Carbonara_amount2.place(x=310, y=165)
 
 btn_enter.place(x=135, y=350)
