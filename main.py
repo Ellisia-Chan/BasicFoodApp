@@ -1,6 +1,20 @@
 import tkinter as tk
 import datetime
 
+#Window config
+win = tk.Tk()
+win.title("Food Kiosk App")
+win.geometry("850x500")
+win.resizable(False, False)
+win.config(bg="#bdcfb5")
+
+#Widgets
+#Const var
+menu1 = tk.BooleanVar()
+menu2 = tk.BooleanVar()
+menu3 = tk.BooleanVar()
+radio1 = tk.IntVar()
+
 class ReceiptProcess:
     def __init__(self):
         self.name = ""
@@ -58,11 +72,11 @@ class ReceiptProcess:
         lbl_receipt_CustomerName.config(text=f"Customer Name: {self.name}")
 
         if self.coffee_amount > 0:
-            self.receipt_txt += f"   Coffee{self.space:<17} x{self.coffee_amount:<5} ₱{self.coffee_order_price}\n"
+            self.receipt_txt += f"   Coffee{self.space:<17} x{self.coffee_amount:<5} {self.coffee_order_price:>3}\n"
         if self.Croissant_amount > 0:
-            self.receipt_txt += f"Croissant{self.space:<16} x{self.Croissant_amount:<5} ₱{self.croissant_order_price}\n"
+            self.receipt_txt += f"Croissant{self.space:<16} x{self.Croissant_amount:<5} {self.croissant_order_price}\n"
         if self.Carbonara_amount > 0:
-            self.receipt_txt += f" Carbonara{self.space:<13} x{self.Carbonara_amount:<5} ₱{self.carbonara_order_price}\n"
+            self.receipt_txt += f" Carbonara{self.space:<13} x{self.Carbonara_amount:<5} {self.carbonara_order_price}\n"
 
         lbl_receipt_datetime.config(text=str(datetime.datetime.now()))
         lbl_receipt_Order.config(text=self.receipt_txt)
@@ -179,45 +193,49 @@ class ReceiptProcess:
 
 run = ReceiptProcess()
 
-#Window config
-win = tk.Tk()
-win.title("Food Kiosk App")
-win.geometry("850x500")
-win.resizable(False, False)
-win.config(bg="#bdcfb5")
 
-#Widgets
-#Const var
-menu1 = tk.BooleanVar()
-menu2 = tk.BooleanVar()
-menu3 = tk.BooleanVar()
-radio1 = tk.IntVar()
 
-#Labels
-lbl_CustomerName = tk.Label(win, text="Customer Name:", font=("Helvetica", 16), bg="#bdcfb5")  
-lbl_Menu = tk.Label(win, text="Menu", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_Discount = tk.Label(win, text="Discount", font=("Helvetica", 16), bg="#bdcfb5")
+###Left frame###
+lbl_CustomerName = tk.Label(win, text="Customer Name:", font=("Helvetica", 16), bg="#bdcfb5")  #Customer name
+lbl_Menu = tk.Label(win, text="Menu", font=("Helvetica", 16), bg="#bdcfb5") #Menu
 
-lbl_Coffee_price = tk.Label(win, text="₱123.00", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_Croissant_price = tk.Label(win, text="₱85.00", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_Carbonara_price = tk.Label(win, text="₱250.00", font=("Helvetica", 16), bg="#bdcfb5")
+#Menu Price
+lbl_Coffee_price = tk.Label(win, text="₱123.00", font=("Helvetica", 16), bg="#bdcfb5") #coffee 
+lbl_Croissant_price = tk.Label(win, text="₱85.00", font=("Helvetica", 16), bg="#bdcfb5") #croissant
+lbl_Carbonara_price = tk.Label(win, text="₱250.00", font=("Helvetica", 16), bg="#bdcfb5") #carbonarra
 
+#Menu Item
 lbl_Coffee_amount = tk.Label(win, text=0, font=("Helvetica", 16), bg="#bdcfb5")
 lbl_Croissant_amount = tk.Label(win, text=0, font=("Helvetica", 16), bg="#bdcfb5")
 lbl_Carbonara_amount = tk.Label(win, text=0, font=("Helvetica", 16), bg="#bdcfb5")
 
-lbl_receipt = tk.Label(win, text="Receipt", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_CustomerName = tk.Label(win, text="Customer Name:", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_order_title = tk.Label(win, text="Orders:", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_Order = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_discount_title = tk.Label(win, text="Discount:", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_discount = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_Total_title = tk.Label(win, text="Total:", font=("Helvetica", 16), bg="#bdcfb5")
+
+lbl_Discount = tk.Label(win, text="Discount", font=("Helvetica", 16), bg="#bdcfb5") #Discount
+
+
+
+###Right frame###
+lbl_receipt = tk.Label(win, text="Receipt", font=("Helvetica", 16), bg="#bdcfb5") #Receipt
+lbl_receipt_CustomerName = tk.Label(win, text="Customer Name:", font=("Helvetica", 16), bg="#bdcfb5") #Customer name
+lbl_receipt_order_title = tk.Label(win, text="Orders:", font=("Helvetica", 16), bg="#bdcfb5") #orders
+
+lbl_receipt_Order = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5") #Space
+
+lbl_receipt_subtotal_title = tk.Label(win, text="Subtotal:", font=("Helvetica", 16), bg="#bdcfb5") #Subtotal    
+lbl_receipt_discount_title = tk.Label(win, text="Discount:", font=("Helvetica", 16), bg="#bdcfb5") #Discount
+
+lbl_receipt_discount = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")#Space
+
+lbl_receipt_Total_title = tk.Label(win, text="Total:", font=("Helvetica", 16), bg="#bdcfb5") #total
+
+#Space lang
 lbl_receipt_Total = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_receipt_subtotal_title = tk.Label(win, text="Subtotal:", font=("Helvetica", 16), bg="#bdcfb5")
 lbl_receipt_subtotal = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
 lbl_receipt_datetime = tk.Label(win, text="", font=("Helvetica", 16), bg="#bdcfb5")
 
+
+
+#left frame
 lbl_CustomerName.place(x=10, y=10)  
 lbl_Menu.place(x=180, y=50)
 lbl_Discount.place(x=180, y=240)
@@ -230,6 +248,7 @@ lbl_Coffee_amount.place(x=350, y=85)
 lbl_Croissant_amount.place(x=350, y=125)
 lbl_Carbonara_amount.place(x=350, y=165)
 
+#right frame
 lbl_receipt.place(x=600, y=10)
 lbl_receipt_CustomerName.place(x=450, y=80)
 lbl_receipt_order_title.place(x=450, y=120)
