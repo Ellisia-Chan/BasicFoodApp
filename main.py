@@ -66,9 +66,9 @@ class ReceiptProcess:
 
         lbl_receipt_datetime.config(text=str(datetime.datetime.now()))
         lbl_receipt_Order.config(text=self.receipt_txt)
-        lbl_receipt_subtotal.config(text=self.subTotal)
+        lbl_receipt_subtotal.config(text=f'₱{self.subTotal}')
         lbl_receipt_discount.config(text=self.discount_percent)
-        lbl_receipt_Total.config(text=self.Total)
+        lbl_receipt_Total.config(text=f'₱{self.Total}')
         btn_enter.config(state=tk.DISABLED)
         btn_clear.config(bg="#931f1d")
 
@@ -198,9 +198,9 @@ lbl_CustomerName = tk.Label(win, text="Customer Name:", font=("Helvetica", 16), 
 lbl_Menu = tk.Label(win, text="Menu", font=("Helvetica", 16), bg="#bdcfb5")
 lbl_Discount = tk.Label(win, text="Discount", font=("Helvetica", 16), bg="#bdcfb5")
 
-lbl_Coffee_price = tk.Label(win, text="123.00", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_Croissant_price = tk.Label(win, text="85.00", font=("Helvetica", 16), bg="#bdcfb5")
-lbl_Carbonara_price = tk.Label(win, text="250.00", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_Coffee_price = tk.Label(win, text="₱123.00", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_Croissant_price = tk.Label(win, text="₱85.00", font=("Helvetica", 16), bg="#bdcfb5")
+lbl_Carbonara_price = tk.Label(win, text="₱250.00", font=("Helvetica", 16), bg="#bdcfb5")
 
 lbl_Coffee_amount = tk.Label(win, text=0, font=("Helvetica", 16), bg="#bdcfb5")
 lbl_Croissant_amount = tk.Label(win, text=0, font=("Helvetica", 16), bg="#bdcfb5")
