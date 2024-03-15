@@ -58,11 +58,11 @@ class ReceiptProcess:
         lbl_receipt_CustomerName.config(text=f"Customer Name: {self.name}")
 
         if self.coffee_amount > 0:
-            self.receipt_txt += f"   Coffee{self.space:<17} x{self.coffee_amount:<5} {self.coffee_order_price:>3}\n"
+            self.receipt_txt += f"   Coffee{self.space:<17} x{self.coffee_amount:<5} ₱{self.coffee_order_price}\n"
         if self.Croissant_amount > 0:
-            self.receipt_txt += f"Croissant{self.space:<16} x{self.Croissant_amount:<5} {self.croissant_order_price}\n"
+            self.receipt_txt += f"Croissant{self.space:<16} x{self.Croissant_amount:<5} ₱{self.croissant_order_price}\n"
         if self.Carbonara_amount > 0:
-            self.receipt_txt += f" Carbonara{self.space:<13} x{self.Carbonara_amount:<5} {self.carbonara_order_price}\n"
+            self.receipt_txt += f" Carbonara{self.space:<13} x{self.Carbonara_amount:<5} ₱{self.carbonara_order_price}\n"
 
         lbl_receipt_datetime.config(text=str(datetime.datetime.now()))
         lbl_receipt_Order.config(text=self.receipt_txt)
