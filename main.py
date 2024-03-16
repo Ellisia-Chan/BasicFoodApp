@@ -156,6 +156,9 @@ class ReceiptProcess:
             self.discount_percent = "0%"
 
     def clear(self):
+        self.coffee_amount = 0
+        self.croissant_amount = 0
+        self.carbonara_amount = 0
         self.coffee_order_price = 0.00
         self.croissant_order_price = 0.00
         self.carbonara_order_price = 0.00
