@@ -169,6 +169,8 @@ class ReceiptProcess:
         self.discounted_price = 0.00
         self.Total = 0.00
 
+        self.window_widgets.radio1.set(-1)
+
         self.window_widgets.ck_btn_coffee.deselect()
         self.window_widgets.ck_btn_croissant.deselect()
         self.window_widgets.ck_btn_carbonara.deselect()
