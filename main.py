@@ -94,15 +94,15 @@ class ReceiptProcess:
         if self.coffee_amount > 0:
             self.subtotal += self.coffee_amount * self.price["coffee"]
             self.coffee_order_price = self.coffee_amount * self.price["coffee"]
-            self.receipt_txt += f"Coffee{self.space:<25} x{self.coffee_amount:<5} ₱{self.coffee_order_price}\n"
+            self.receipt_txt += f"Coffee{self.space:<25} x{self.coffee_amount:<5} ₱{self.coffee_order_price:.2f}\n"
         if self.croissant_amount > 0:
             self.subtotal += self.croissant_amount * self.price["croissant"]
             self.croissant_order_price = self.croissant_amount * self.price["croissant"]
-            self.receipt_txt += f"Croissant{self.space:<20} x{self.croissant_amount:<5} ₱{self.croissant_order_price}\n"
+            self.receipt_txt += f"Croissant{self.space:<20} x{self.croissant_amount:<5} ₱{self.croissant_order_price:.2f}\n"
         if self.carbonara_amount > 0:
             self.subtotal += self.carbonara_amount * self.price["carbonara"]
             self.carbonara_order_price = self.carbonara_amount * self.price["carbonara"]
-            self.receipt_txt += f"Carbonara{self.space:<20} x{self.carbonara_amount:<5} ₱{self.carbonara_order_price}\n"
+            self.receipt_txt += f"Carbonara{self.space:<20} x{self.carbonara_amount:<5} ₱{self.carbonara_order_price:.2f}\n"
 
 
         #Total Calculation with/without Disccount
@@ -115,9 +115,9 @@ class ReceiptProcess:
         self.window_widgets.lbl_receipt_timeDate.config(text=str(datetime.datetime.now()))
         self.window_widgets.lbl_receipt_customerName.config(text="Customer Name:" + " " * 5 + self.customerName)
         self.window_widgets.lbl_receipt_orders.config(text=self.receipt_txt)
-        self.window_widgets.lbl_receipt_subtotal.config(text="Subtotal:" + " " * 35 + f"₱{self.subtotal}")
+        self.window_widgets.lbl_receipt_subtotal.config(text="Subtotal:" + " " * 35 + f"₱{self.subtotal:.2f}")
         self.window_widgets.lbl_receipt_discount.config(text="Discount:" + " " * 38 + f"{self.discount_percent}")
-        self.window_widgets.lbl_receipt_total.config(text="Total:" + " " * 40 + f"₱{self.Total}")
+        self.window_widgets.lbl_receipt_total.config(text="Total:" + " " * 40 + f"₱{self.Total:.2f}")
 
         #Widgets Disabled
         self.window_widgets.ent_customerName.config(state=tk.DISABLED)
