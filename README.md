@@ -8,3 +8,4 @@ Task: <br>
 ✔ Receipt Process <br>
 ❌ Option To Add More Items in Menu <br>
 ❌ Login Page for Admin and Users <br>
+❌ Settings
