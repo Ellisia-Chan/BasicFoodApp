@@ -25,6 +25,7 @@ class ReceiptProcess:
         #misc
         self.space = ""
     def amountToggle(self):
+        #For increase and Decreaase ammount button
         if self.window_widgets.menu1.get() == True:
             self.window_widgets.btn_coffee_add.config(state=tk.NORMAL)
             self.window_widgets.btn_coffee_minus.config(state=tk.NORMAL)
