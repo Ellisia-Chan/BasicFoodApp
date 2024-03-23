@@ -33,6 +33,7 @@ class ReceiptProcess:
             self.window_widgets.btn_coffee_add.config(state=tk.DISABLED)
             self.window_widgets.btn_coffee_minus.config(state=tk.DISABLED)
             self.window_widgets.lbl_coffee_amount.config(text=0)
+            self.coffee_amount = 0
         if self.window_widgets.menu2.get() == True:
             self.window_widgets.btn_croissant_add.config(state=tk.NORMAL)
             self.window_widgets.btn_croissant_minus.config(state=tk.NORMAL)
@@ -40,6 +41,7 @@ class ReceiptProcess:
             self.window_widgets.btn_croissant_add.config(state=tk.DISABLED)
             self.window_widgets.btn_croissant_minus.config(state=tk.DISABLED)
             self.window_widgets.lbl_croissant_amount.config(text=0)
+            self.croissant_amount = 0
         if self.window_widgets.menu3.get() == True:
             self.window_widgets.btn_carbonara_add.config(state=tk.NORMAL)
             self.window_widgets.btn_carbonara_minus.config(state=tk.NORMAL)
@@ -47,6 +49,7 @@ class ReceiptProcess:
             self.window_widgets.btn_carbonara_add.config(state=tk.DISABLED)
             self.window_widgets.btn_carbonara_minus.config(state=tk.DISABLED)
             self.window_widgets.lbl_carbonara_amount.config(text=0)
+            self.carbonara_amount = 0
 
     def amountAdd_Minus(self, value):
         self.coffee_amount = self.window_widgets.lbl_coffee_amount.cget("text")
