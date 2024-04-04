@@ -1,5 +1,6 @@
 # BasicFoodApp
 For School Purpose Only
+</br>
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 
